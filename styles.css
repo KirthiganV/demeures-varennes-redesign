@@ -405,24 +405,24 @@ h1, h2, h3, h4 {
 }
 
 /* =====================================================
-   INTRO TABLEAU - Texte sur image
+   INTRO TABLEAU - Texte sur image avec glassmorphism
 ===================================================== */
 .intro-tableau {
-    background: var(--light-grey);
+    background: var(--main-black);
 }
 
 .intro-tableau .section-bg::after {
-    background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.7) 40%,
-        transparent 70%
-    );
+    background: none;
 }
 
 .intro-content {
     max-width: 550px;
-    padding: 4rem;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 4px solid var(--main-color);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .intro-eyebrow {
@@ -443,6 +443,8 @@ h1, h2, h3, h4 {
 .intro-details {
     display: flex;
     gap: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201, 172, 161, 0.3);
 }
 
 .intro-detail {
@@ -451,9 +453,10 @@ h1, h2, h3, h4 {
 
 .intro-detail-number {
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 3.5rem;
     color: var(--main-color);
     line-height: 1;
+    font-weight: 300;
 }
 
 .intro-detail-label {
@@ -554,7 +557,7 @@ h1, h2, h3, h4 {
 }
 
 /* =====================================================
-   TABLEAU PARALLAXE - Style Caillebotte
+   TABLEAU PARALLAXE - Style Cinématique Premium
 ===================================================== */
 .tableau {
     position: relative;
@@ -573,16 +576,28 @@ h1, h2, h3, h4 {
     height: 100%;
     object-fit: cover;
     transition: transform 0.1s linear;
+    filter: brightness(0.9) contrast(1.05);
 }
 
 .tableau-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-        ellipse at center,
-        transparent 0%,
-        rgba(41, 41, 41, 0.3) 100%
-    );
+    background:
+        linear-gradient(135deg, rgba(41, 41, 41, 0.7) 0%, transparent 60%),
+        linear-gradient(to top, rgba(41, 41, 41, 0.8) 0%, transparent 50%);
+}
+
+/* Ligne décorative verticale */
+.tableau::before {
+    content: '';
+    position: absolute;
+    left: 8%;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--main-color), transparent);
+    z-index: 5;
+    opacity: 0.6;
 }
 
 .tableau-content {
@@ -590,49 +605,126 @@ h1, h2, h3, h4 {
     z-index: 10;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     height: 100vh;
     padding: var(--section-padding);
-    padding-bottom: 8rem;
+    padding-left: 12%;
+}
+
+/* Numéro de section géant en arrière-plan */
+.tableau-number {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: clamp(15rem, 30vw, 40rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.05);
+    line-height: 1;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .tableau-text-box {
-    max-width: 500px;
-    padding: 3rem;
-    background: var(--overlay-light);
-    backdrop-filter: blur(20px);
-    border-left: 3px solid var(--main-color);
+    max-width: 550px;
+    position: relative;
+}
+
+.tableau-text-box::before {
+    content: '';
+    position: absolute;
+    left: -3rem;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--main-color);
 }
 
 .tableau-text-box .text-accent {
     color: var(--main-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     display: block;
 }
 
 .tableau-text-box h2 {
-    color: var(--main-black);
+    color: var(--white);
     margin-bottom: 1.5rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .tableau-text-box p {
-    color: var(--secondary-color);
-    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2.5rem;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tableau-text-box .btn {
+    background: var(--white);
+    color: var(--main-black);
+}
+
+.tableau-text-box .btn:hover {
+    background: var(--main-color);
+    color: var(--white);
 }
 
 /* Tableau variations */
+.tableau--right {
+    text-align: right;
+}
+
+.tableau--right::before {
+    left: auto;
+    right: 8%;
+}
+
 .tableau--right .tableau-content {
     align-items: flex-end;
+    padding-left: var(--section-padding);
+    padding-right: 12%;
+}
+
+.tableau--right .tableau-number {
+    right: auto;
+    left: 5%;
+}
+
+.tableau--right .tableau-text-box::before {
+    left: auto;
+    right: -3rem;
+}
+
+.tableau--center {
+    text-align: center;
+}
+
+.tableau--center::before {
+    display: none;
 }
 
 .tableau--center .tableau-content {
     align-items: center;
-    text-align: center;
+    padding-left: var(--section-padding);
 }
 
-.tableau--center .tableau-text-box {
-    border-left: none;
-    border-top: 3px solid var(--main-color);
+.tableau--center .tableau-text-box::before {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -2rem;
+    bottom: auto;
+    width: 80px;
+    height: 4px;
+}
+
+.tableau--center .tableau-number {
+    right: 50%;
+    transform: translate(50%, -50%);
+    opacity: 0.03;
 }
 
 /* =====================================================
@@ -1136,32 +1228,72 @@ h1, h2, h3, h4 {
         font-size: clamp(2.5rem, 10vw, 5rem);
     }
 
-    .intro-tableau .section-bg::after {
-        background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(255, 255, 255, 0.8) 60%,
-            transparent 100%
-        );
-    }
-
     .intro-content {
         padding: 2rem;
-        padding-top: 120px;
+        margin: 2rem;
+        max-width: calc(100% - 4rem);
     }
 
     .intro-details {
-        flex-direction: column;
-        gap: 2rem;
+        flex-direction: row;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+
+    .intro-detail-number {
+        font-size: 2.5rem;
     }
 
     .experience-card {
         width: 85vw;
     }
 
+    /* Tableaux sur mobile */
+    .tableau::before {
+        display: none;
+    }
+
+    .tableau-number {
+        font-size: 8rem;
+        opacity: 0.08;
+        right: 10%;
+    }
+
     .tableau-content {
         padding: 2rem;
-        padding-bottom: 4rem;
+        padding-left: 2rem;
+    }
+
+    .tableau-text-box::before {
+        left: -1.5rem;
+        width: 3px;
+    }
+
+    .tableau-text-box h2 {
+        font-size: 2rem;
+    }
+
+    .tableau-text-box p {
+        font-size: 1rem;
+    }
+
+    .tableau--right .tableau-content,
+    .tableau--center .tableau-content {
+        padding-right: 2rem;
+        padding-left: 2rem;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .tableau--right .tableau-text-box::before,
+    .tableau--center .tableau-text-box::before {
+        left: -1.5rem;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        height: auto;
+        transform: none;
     }
 
     .tableau-text-box {
