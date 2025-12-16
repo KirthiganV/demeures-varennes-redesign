@@ -143,7 +143,7 @@ h1, h2, h3, h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    mix-blend-mode: difference;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
     transition: var(--transition-medium);
 }
 
@@ -151,7 +151,6 @@ h1, h2, h3, h4 {
     padding: 1rem var(--section-padding);
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
-    mix-blend-mode: normal;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
@@ -193,7 +192,8 @@ h1, h2, h3, h4 {
 
 .nav-links a {
     font-family: var(--font-accent);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     text-decoration: none;
@@ -201,10 +201,12 @@ h1, h2, h3, h4 {
     position: relative;
     padding: 0.5rem 0;
     transition: var(--transition-fast);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .nav-main.scrolled .nav-links a {
     color: var(--main-black);
+    text-shadow: none;
 }
 
 .nav-links a::after {
@@ -351,6 +353,16 @@ h1, h2, h3, h4 {
     width: auto;
 }
 
+.hero-stars {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.hero-stars i {
+    font-size: 0.7rem;
+    color: #d4af37;
+}
+
 .hero-badge span {
     font-family: var(--font-accent);
     font-size: 0.65rem;
@@ -405,67 +417,105 @@ h1, h2, h3, h4 {
 }
 
 /* =====================================================
-   INTRO TABLEAU - Texte sur image avec glassmorphism
+   INTRO DOMAINE - Layout élégant texte/image
 ===================================================== */
-.intro-tableau {
-    background: var(--main-black);
+.intro-domaine {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    scroll-snap-align: start;
 }
 
-.intro-tableau .section-bg::after {
-    background: none;
+.intro-domaine-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem;
+    background: var(--white);
 }
 
-.intro-content {
-    max-width: 550px;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-left: 4px solid var(--main-color);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+.intro-domaine-text {
+    max-width: 500px;
 }
 
-.intro-eyebrow {
+.intro-domaine-text .text-accent {
     color: var(--main-color);
+    display: block;
     margin-bottom: 1.5rem;
 }
 
-.intro-title {
+.intro-domaine-text h2 {
     color: var(--main-black);
     margin-bottom: 2rem;
 }
 
-.intro-description {
+.intro-domaine-text p {
     color: var(--secondary-color);
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
 }
 
-.intro-details {
+.intro-domaine-stats {
     display: flex;
-    gap: 3rem;
-    padding-top: 2rem;
+    gap: 4rem;
+    padding-top: 3rem;
     border-top: 1px solid rgba(201, 172, 161, 0.3);
 }
 
-.intro-detail {
-    text-align: center;
+.intro-stat {
+    text-align: left;
 }
 
-.intro-detail-number {
+.intro-stat-number {
+    display: block;
     font-family: var(--font-display);
-    font-size: 3.5rem;
+    font-size: clamp(3rem, 5vw, 4.5rem);
     color: var(--main-color);
     line-height: 1;
     font-weight: 300;
 }
 
-.intro-detail-label {
+.intro-stat-label {
+    display: block;
     font-family: var(--font-accent);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--secondary-color);
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.intro-domaine-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-domaine-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile: empiler verticalement */
+@media (max-width: 1024px) {
+    .intro-domaine {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .intro-domaine-content {
+        padding: 4rem 2rem;
+        order: 2;
+    }
+
+    .intro-domaine-image {
+        height: 50vh;
+        order: 1;
+    }
+
+    .intro-domaine-stats {
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
 }
 
 /* =====================================================
